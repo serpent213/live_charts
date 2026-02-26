@@ -9,8 +9,18 @@
   "module": "./priv/static/live_charts.esm.js",
   "main": "./priv/static/live_charts.cjs.js",
   "exports": {
-    "import": "./priv/static/live_charts.esm.js",
-    "require": "./priv/static/live_charts.cjs.js"
+    ".": {
+      "import": "./priv/static/live_charts.esm.js",
+      "require": "./priv/static/live_charts.cjs.js"
+    },
+    "./apex": {
+      "import": "./priv/static/live_charts.apex.esm.js",
+      "require": "./priv/static/live_charts.apex.cjs.js"
+    },
+    "./echarts": {
+      "import": "./priv/static/live_charts.echarts.esm.js",
+      "require": "./priv/static/live_charts.echarts.cjs.js"
+    }
   },
   "files": [
     "README.md",

@@ -1,9 +1,9 @@
-import ApexChartsHook from './hooks/ApexChartsHook';
-import EChartsHook from './hooks/EChartsHook';
+import LiveChartsApex from './live_charts.apex';
+import LiveChartsECharts from './live_charts.echarts';
 
 export default {
   Hooks: {
-    'LiveCharts.Hooks.ApexCharts': ApexChartsHook,
-    'LiveCharts.Hooks.ECharts': EChartsHook,
+    ...LiveChartsApex.Hooks,
+    ...LiveChartsECharts.Hooks,
   },
 };

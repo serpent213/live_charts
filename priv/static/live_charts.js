@@ -10717,6 +10717,13 @@ var LiveCharts = (() => {
   };
   var ApexChartsHook_default = ApexChartsHook;
 
+  // js/live_charts.apex.js
+  var live_charts_apex_default = {
+    Hooks: {
+      "LiveCharts.Hooks.ApexCharts": ApexChartsHook_default
+    }
+  };
+
   // node_modules/tslib/tslib.es6.js
   var extendStatics = function(d2, b2) {
     extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d3, b3) {
@@ -91581,12 +91588,16 @@ var LiveCharts = (() => {
   };
   var EChartsHook_default = EChartsHook;
 
-  // js/live_charts.js
-  var live_charts_default = {
+  // js/live_charts.echarts.js
+  var live_charts_echarts_default = {
     Hooks: {
-      "LiveCharts.Hooks.ApexCharts": ApexChartsHook_default,
       "LiveCharts.Hooks.ECharts": EChartsHook_default
     }
+  };
+
+  // js/live_charts.js
+  var live_charts_default = {
+    Hooks: __spreadValues(__spreadValues({}, live_charts_apex_default.Hooks), live_charts_echarts_default.Hooks)
   };
   return __toCommonJS(live_charts_exports);
 })();

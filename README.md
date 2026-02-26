@@ -42,6 +42,38 @@ let liveSocket = new LiveSocket("/live", Socket, {
 });
 ```
 
+The default `import LiveCharts from "live_charts"` approach is convenient for
+local testing and quick setup. It registers all built-in hooks, but it also
+pulls in all built-in charting npm libraries and can significantly increase
+bundle size, even if your app only uses one adapter.
+
+For production, most applications should import only the adapter entrypoint they
+use to avoid shipping unused chart code.
+
+```javascript
+// Example: ECharts only
+import LiveChartsECharts from "live_charts/echarts"
+
+let liveSocket = new LiveSocket("/live", Socket, {
+  params: {_csrf_token: csrfToken},
+  hooks: {
+    ...LiveChartsECharts.Hooks,
+  },
+});
+```
+
+```javascript
+// Example: ApexCharts only
+import LiveChartsApex from "live_charts/apex"
+
+let liveSocket = new LiveSocket("/live", Socket, {
+  params: {_csrf_token: csrfToken},
+  hooks: {
+    ...LiveChartsApex.Hooks,
+  },
+});
+```
+
 
 
 ## Configuration
