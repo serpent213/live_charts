@@ -6,9 +6,10 @@ defmodule LiveCharts do
   To get started, see the [README](https://hexdocs.pm/live_charts).
 
   LiveCharts currently comes with support for
-  [ApexCharts](https://apexcharts.com/) out of the box, but it
-  can work with any JS charting library that has a
-  `LiveCharts.Adapter` defined.
+  [ApexCharts](https://apexcharts.com/) and
+  [Apache ECharts](https://echarts.apache.org/) out of the box, but it
+  can work with any JS charting library that has a `LiveCharts.Adapter`
+  defined.
   """
 
   @doc """

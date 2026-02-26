@@ -3,8 +3,9 @@ LiveCharts
 
 > LiveCharts allows you to render static and dynamic charts in Phoenix LiveView applications.
 
-LiveCharts currently comes with support for [ApexCharts][apexcharts] out of the box, but it
-can work with any JS charting library that has a [`LiveCharts.Adapter`][docs-adapter] defined.
+LiveCharts currently comes with support for [ApexCharts][apexcharts] and
+[Apache ECharts][echarts] out of the box, but it can work with any JS charting
+library that has a [`LiveCharts.Adapter`][docs-adapter] defined.
 
 To see live demos, visit: [livecharts.stax3.com][demos].
 
@@ -101,7 +102,9 @@ my_chart =
 ```
 
 For a full list of options, see the official [ApexCharts docs][apexcharts-docs] and
-the [`LiveCharts.Adapter.ApexCharts`][docs-apex] adapter information on HexDocs.
+[ECharts option docs][echarts-docs], plus the built-in adapter docs for
+[`LiveCharts.Adapter.ApexCharts`][docs-apex] and
+[`LiveCharts.Adapter.ECharts`][docs-echarts] on HexDocs.
 You can also [view live demos][demos] here.
 
 
@@ -226,6 +229,8 @@ LiveCharts is licensed under the [MIT License][license].
 [hexpm]:            https://hex.pm/packages/live_charts
 [apexcharts]:       https://apexcharts.com
 [apexcharts-docs]:  https://apexcharts.com/docs/
+[echarts]:          https://echarts.apache.org
+[echarts-docs]:     https://echarts.apache.org/option.html
 [demos]:            https://livecharts.stax3.com/
 [stax3]:            https://stax3.com
 [email]:            mailto:contact@stax3.com
@@ -234,3 +239,4 @@ LiveCharts is licensed under the [MIT License][license].
 [docs-chart]:       https://hexdocs.pm/live_charts/LiveCharts.Chart.html
 [docs-adapter]:     https://hexdocs.pm/live_charts/LiveCharts.Adapter.html
 [docs-apex]:        https://hexdocs.pm/live_charts/LiveCharts.Adapter.ApexCharts.html
+[docs-echarts]:     https://hexdocs.pm/live_charts/LiveCharts.Adapter.ECharts.html

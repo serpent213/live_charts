@@ -6,8 +6,9 @@ defmodule LiveCharts.Adapter do
   into a JS charting library specific configuration. It will usually
   expose a LiveView hook to handle dynamic data updates as well.
 
-  Right now, LiveCharts ships with only one adapter:
-  `LiveCharts.Adapter.ApexCharts` (default).
+  LiveCharts ships with two built-in adapters:
+  `LiveCharts.Adapter.ApexCharts` (default) and
+  `LiveCharts.Adapter.ECharts`.
 
   ## Example
 

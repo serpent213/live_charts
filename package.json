@@ -18,5 +18,8 @@
     "package.json",
     "priv/static/*",
     "assets/js/live_charts/*"
-  ]
+  ],
+  "dependencies": {
+    "echarts": "^6.0.0"
+  }
 }
