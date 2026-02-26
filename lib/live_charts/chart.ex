@@ -14,6 +14,7 @@ defmodule LiveCharts.Chart do
     :type,
     series: [],
     options: %{},
+    hook_options: %{},
     adapter: nil
   ]
 
@@ -26,6 +27,7 @@ defmodule LiveCharts.Chart do
           type: atom(),
           series: [series()],
           options: map(),
+          hook_options: map(),
           adapter: atom()
         }
 
@@ -33,7 +35,18 @@ defmodule LiveCharts.Chart do
   Create a new `%LiveCharts.Chart{}` struct
   """
   @spec build(map()) :: t()
-  def build(%{type: _} = params) do
+  def build(%{type: _} = params), do: build(params, [])
+
+  @doc """
+  Create a new `%LiveCharts.Chart{}` struct with build-time options.
+
+  Currently supported options:
+
+  - `:echarts_init` - map or keyword list of options passed to
+    `echarts.init/3` when using the ECharts adapter.
+  """
+  @spec build(map(), keyword()) :: t()
+  def build(%{type: _} = params, build_options) when is_list(build_options) do
     default_adapter = Application.fetch_env!(:live_charts, :adapter)
 
     %Chart{adapter: default_adapter}
@@ -42,6 +55,7 @@ defmodule LiveCharts.Chart do
       nil -> build_id()
       id -> id
     end)
+    |> put_hook_options(build_options)
   end
 
   # Internal Methods
@@ -68,5 +82,34 @@ defmodule LiveCharts.Chart do
   def hook(%Chart{} = chart), do: chart.adapter.hook(chart)
 
   @doc false
+  def hook_opts(%Chart{} = chart) do
+    if function_exported?(chart.adapter, :hook_opts, 1) do
+      chart.adapter.hook_opts(chart)
+    else
+      %{}
+    end
+  end
+
+  @doc false
   def build_config(%Chart{} = chart), do: chart.adapter.build_config(chart)
+
+  defp put_hook_options(%Chart{adapter: adapter} = chart, build_options) do
+    hook_options =
+      case Keyword.fetch(build_options, :echarts_init) do
+        {:ok, init_opts} when adapter == LiveCharts.Adapter.ECharts ->
+          %{init: normalize_echarts_init(init_opts)}
+
+        _ ->
+          %{}
+      end
+
+    Map.put(chart, :hook_options, hook_options)
+  end
+
+  defp normalize_echarts_init(opts) when is_list(opts),
+    do: opts |> Enum.into(%{}) |> normalize_echarts_init()
+
+  defp normalize_echarts_init(opts) when is_map(opts), do: opts
+
+  defp normalize_echarts_init(_), do: %{}
 end

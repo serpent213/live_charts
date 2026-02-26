@@ -47,6 +47,11 @@ defmodule LiveCharts.Adapter do
 
       @doc false
       def implements, do: LiveCharts.Adapter
+
+      @doc false
+      def hook_opts(_chart), do: %{}
+
+      defoverridable hook_opts: 1
     end
   end
 
@@ -55,6 +60,13 @@ defmodule LiveCharts.Adapter do
   the chart.
   """
   @callback hook(LiveCharts.Chart.t()) :: String.t()
+
+  @doc """
+  Optional options passed to the LiveView hook instance.
+  """
+  @callback hook_opts(LiveCharts.Chart.t()) :: map()
+
+  @optional_callbacks hook_opts: 1
 
   @doc """
   Translate a `%Chart{}` struct to JS library-specific options

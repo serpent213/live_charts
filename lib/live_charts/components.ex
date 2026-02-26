@@ -18,10 +18,11 @@ defmodule LiveCharts.Components do
     assigns =
       assigns
       |> assign(:html_data, Chart.html_data(chart))
+      |> assign(:hook_opts, encode_hook_opts(chart))
       |> assign(:hook, Chart.hook(chart))
 
     ~H"""
-    <div id={@chart.id} data-chart={@html_data} phx-hook={@hook}></div>
+    <div id={@chart.id} data-chart={@html_data} data-hook-options={@hook_opts} phx-hook={@hook}></div>
     """
   end
 
@@ -36,5 +37,10 @@ defmodule LiveCharts.Components do
 
   def push_update(%Socket{} = socket, id, data) when is_binary(id) do
     LiveView.push_event(socket, "live-charts:update:#{id}", %{data: data})
+  end
+
+  defp encode_hook_opts(%Chart{} = chart) do
+    json_library = Application.fetch_env!(:live_charts, :json_library)
+    chart |> Chart.hook_opts() |> json_library.encode!()
   end
 end

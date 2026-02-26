@@ -139,6 +139,32 @@ For a full list of options, see the official [ApexCharts docs][apexcharts-docs] 
 [`LiveCharts.Adapter.ECharts`][docs-echarts] on HexDocs.
 You can also [view live demos][demos] here.
 
+### ECharts init options (SVG renderer)
+
+When using the ECharts adapter, you can pass ECharts init options as a second
+argument to `LiveCharts.build/2` via `:echarts_init`.
+
+```elixir
+chart =
+  LiveCharts.build(
+    %{
+      type: :line,
+      adapter: LiveCharts.Adapter.ECharts,
+      series: [%{name: "Revenue", data: [10, 20, 30]}],
+      options: %{
+        xAxis: %{type: "category"},
+        yAxis: %{type: "value"}
+      }
+    },
+    echarts_init: %{
+      renderer: :svg
+    }
+  )
+```
+
+This is passed to `echarts.init(el, null, init_options)`, while chart options
+continue to be passed to `chart.setOption(...)` as usual.
+
 
 ### Render Static Charts
 

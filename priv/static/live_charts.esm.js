@@ -91523,15 +91523,24 @@ var EChartsHook = {
     delete this.el.dataset.chart;
     return JSON.parse(encodedConfig);
   },
+  getHookOptions() {
+    const encodedHookOptions = this.el.dataset.hookOptions;
+    if (!encodedHookOptions) {
+      return {};
+    }
+    return JSON.parse(encodedHookOptions);
+  },
   renderChart() {
     const config = this.getConfig();
     if (!config) {
       return;
     }
+    const hookOptions = this.getHookOptions();
+    const initOptions = hookOptions.init || {};
     if (this.chart) {
       this.chart.dispose();
     }
-    this.chart = init2(this.el);
+    this.chart = init2(this.el, null, initOptions);
     this.chart.setOption(config);
   },
   onChartUpdateEvent({ data }) {

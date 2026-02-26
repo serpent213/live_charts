@@ -8,6 +8,11 @@ defmodule LiveCharts.Adapter.EChartsTest do
     assert ECharts.hook(%Chart{}) == "LiveCharts.Hooks.ECharts"
   end
 
+  test "hook_opts/1 forwards chart hook options" do
+    chart = %Chart{hook_options: %{init: %{renderer: "svg"}}}
+    assert ECharts.hook_opts(chart) == %{init: %{renderer: "svg"}}
+  end
+
   test "build_config/1 merges options and injects default series type" do
     chart = %Chart{
       id: "chart-1",

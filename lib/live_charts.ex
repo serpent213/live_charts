@@ -15,9 +15,10 @@ defmodule LiveCharts do
   @doc """
   Build a new chart config.
 
-  See `LiveCharts.Chart.build/1` for more details.
+  See `LiveCharts.Chart.build/1` and `LiveCharts.Chart.build/2` for more details.
   """
   defdelegate build(assigns), to: LiveCharts.Chart
+  defdelegate build(assigns, opts), to: LiveCharts.Chart
 
   @doc """
   Renders a chart component.

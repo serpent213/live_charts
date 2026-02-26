@@ -33,6 +33,16 @@ const EChartsHook = {
     return JSON.parse(encodedConfig);
   },
 
+  getHookOptions() {
+    const encodedHookOptions = this.el.dataset.hookOptions;
+
+    if (!encodedHookOptions) {
+      return {};
+    }
+
+    return JSON.parse(encodedHookOptions);
+  },
+
   renderChart() {
     const config = this.getConfig();
 
@@ -40,11 +50,14 @@ const EChartsHook = {
       return;
     }
 
+    const hookOptions = this.getHookOptions();
+    const initOptions = hookOptions.init || {};
+
     if (this.chart) {
       this.chart.dispose();
     }
 
-    this.chart = echarts.init(this.el);
+    this.chart = echarts.init(this.el, null, initOptions);
     this.chart.setOption(config);
   },
 

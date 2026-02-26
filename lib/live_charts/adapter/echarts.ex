@@ -17,6 +17,9 @@ defmodule LiveCharts.Adapter.ECharts do
   end
 
   @impl true
+  def hook_opts(%Chart{} = chart), do: chart.hook_options
+
+  @impl true
   def build_config(%Chart{} = chart) do
     options = Map.drop(chart.options, [:series])
 
